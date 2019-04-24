@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三级联动</title>
+    <script src="./js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .firstList {
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            border-bottom:1px solid #ccc;
+            line-height:50px;
+            height:50px;
+            position:fixed;
+            z-index:999;
+            background:#fff;
+        }
+
+        .firstList > li {
+            width: 25%;
+            text-align: center;
+            line-height: 50px;
+            font-size:18px;
+        }
+        .firstList > li> a{
+            text-underline: none;
+        }
+
+        .firstList > li>a:hover {
+            color:cornflowerblue;
+            text-underline: none;
+        }
+        .content-box-1{
+            width:100%;
+            position:absolute;
+            top:50px;
+            left:0;
+            display:none;
+        }
+        .content-box-2{
+            width:100%;
+            position:absolute;
+            top:0;
+            left:0;
+            display:none;
+        }
+        .content-box-content{
+            width:100%;
+            height:100%;
+            position:absolute;
+        }
+        .left_box{
+            width:30%;
+            position:fixed;
+            top:50px;
+            left:0;
+            box-sizing: border-box;
+            border-right:1px solid #ccc;
+        }
+        .left_box>li{
+            width:100%;
+            line-height:50px;
+            height:50px;
+            border-bottom:1px solid #ccc;
+            text-align: center;
+        }
+        .right_box{
+            width:70%;
+            position:absolute;
+            top:50px;
+            left:30%;
+            background:lightblue;
+            height:100%;
+            border-left:1px solid #ccc;
+            box-sizing: border-box;
+            /*overflow-y:scroll;*/
+        }
+        .right_box>li{
+            width:100%;
+            line-height:50px;
+            height:50px;
+            border-bottom:1px solid #ccc;
+            border-left:1px solid #ccc;
+            text-align:center;
+        }
+        .content-box-3{
+            width:100%;
+            position:absolute;
+            background:red;
+            top:50px;
+            left:0;
+            display:none;
+        }
+        .content-box-4{
+            width:100%;
+            background:red;
+            position:absolute;
+            top:50px;
+            left:0;
+            display:none;
+        }
+        .content-box-4>ul>li{
+            height:100px;
+            width:100%;
+            border-bottom:1px solid #ccc;
+            line-height:100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul class="firstList">
+        <li onclick="onChange(0)">
+            发文
+        </li>
+        <li onclick="onChange(1)">
+            会议
+        </li>
+        <li onclick="onChange(2)">
+            值班
+        </li>
+        <li  onclick="onChange(3)">
+            督办
+        </li>
+        <li  onclick="onChange(4)">
+            督办
+        </li>
+    </ul>
+    <div class="content-box-1">
+        <ul>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+        </ul>
+    </div>
+    <div class="content-box-2">
+        <div class="content-box-content">
+            <ul class="left_box">
+            </ul>
+            <ul class="right_box">
+                <!--<li>1111111111</li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="content-box-3">
+        <ul>
+            <li>3333333</li>
+            <li>3333333</li>
+            <li>3333333</li>
+            <li>3333333</li>
+        </ul>
+    </div>
+    <div class="content-box-4">
+        <ul>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+            <li>444444444444</li>
+        </ul>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function(){
+        onChange(0);
+
+    });
+    function onChange(index){
+        $('.content-box-1').hide();
+        $('.content-box-2').hide();
+        $('.content-box-3').hide();
+        $('.content-box-4').hide();
+        if(index == 0){
+            $('.content-box-1').show();
+        }else if(index == 1){
+            $('.content-box-2').show();
+        }else if(index == 2) {
+            $('.content-box-3').show();
+        }else if(index == 3) {
+            $('.content-box-4').show();
+        }
+    }
+
+    var listData = [
+        {
+            key:'值班管理',
+            list:[
+                '值班人员','值班记录'
+            ]
+        },
+        {
+            key:'通讯录',
+            list:[
+                '通讯录','通讯录填报列表'
+            ]
+        },
+        {
+            key:'节假日值班',
+            list:[
+                '值班人员','值班记录'
+            ]
+        },
+        {
+            key:'重要事项报告',
+            list:[
+                '报告人员','报告记录'
+            ]
+        },
+        {
+            key:'日常记录',
+            list:[
+                '事件','日常记录表'
+            ]
+        },
+        {
+            key:'系统设置',
+            list:[
+                '我的','设置'
+            ]
+        }
+    ];
+    NavData();
+    function NavData(){
+        var tempDiv = '';
+        for(var i=0;i<listData.length;i++){
+            tempDiv+='<li onclick="toNavList('+i+')">'+
+                listData[i]['key']+
+                '</li>';
+        }
+        $('.left_box').append(tempDiv);
+    }
+
+
+   function toNavList(index){
+       var tempDiv = '';
+       $('.right_box').empty();
+
+       var tempList = listData[index]['list'];
+       for(var j=0;j<tempList.length;j++){
+           tempDiv+='<li>'+
+               tempList[j]+
+               '</li>';
+       }
+       $('.right_box').append(tempDiv);
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>
